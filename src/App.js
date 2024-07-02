@@ -1,24 +1,28 @@
 import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react';
+import CalendarComponent from './calendar';
 
 function App() {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [entries, setEntries] = useState({});
+
+  const handleDateClick = (date) => {
+    setSelectedDate(date);
+  };
+
+  const handleSaveEntry = (date, entry) => {
+    setEntries({ ...entries, [date.toDateString()]: entry });
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='journal-app'>
+      <h1>My Journal App</h1>
+      <CalendarComponent onDateClick={handleDateClick} />
+
+
+
     </div>
+       
   );
 }
 
